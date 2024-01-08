@@ -39,7 +39,7 @@ function App() {
     <>
       <div className="app">
         <h1 className="fw-bold display-1">cleanse.</h1>
-        <h6 className="fw-light mb-5"> regain privacy on Aleo by transferring complete balance to fresh address.</h6>
+        <h6 className="fw-light mb-5"> regain privacy on Aleo by transferring complete balance to fresh address</h6>
         <div className="card">
           <form>
             <div className="mb-3">
