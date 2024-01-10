@@ -1,4 +1,4 @@
-# helloworld.aleo
+# cleanse_v1.aleo
 
 ## Build Guide
 
