@@ -1,39 +1,39 @@
-//import { useState } from "react";
+
 import "./App.css";
-//import helloworld_program from "../helloworld/build/main.aleo?raw";
-//import { AleoWorker } from "./workers/AleoWorker";
+import cleanse_v1 from "../cleanse_v1/build/main.aleo?raw";
+import { AleoWorker } from "./workers/AleoWorker";
+import { Account } from '@aleohq/sdk';
 
-//const aleoWorker = AleoWorker();
+const aleoWorker = AleoWorker();
 function App() {
-  /*
-  const [count, setCount] = useState(0);
-  const [account, setAccount] = useState(null);
-  const [executing, setExecuting] = useState(false);
-  const [deploying, setDeploying] = useState(false);
 
-  const generateAccount = async () => {
-    const key = await aleoWorker.getPrivateKey();
-    setAccount(await key.to_string());
-  };
-  */
-
-  async function privatelyTransfer() {
-    //setExecuting(true);
-    
-    /*
-    const result = await aleoWorker.localProgramExecution(
-      helloworld_program,
-      "main",
-      ["5u32", "8u32"],
-    );
-    //setExecuting(false);
-  */
-
-    //alert(JSON.stringify(result));
-    alert("Success!")
-    
-   console.log("transfered")
+  async function connectAccount() {
+    console.log("connected")
   }
+
+  async function generateAccount(){
+
+    const account = new Account();
+    const privateKey = account.privateKey();
+    const viewKey = account.viewKey();
+    const address = account.address();
+
+    console.log(account)
+
+  }
+  async function publicTransfer() {
+
+    const result = await aleoWorker.localProgramExecution(
+      cleanse_v1,
+      "transfer_public",
+      ["aleo1lm4cderp47hgxd7p4erfgngw7zw47cswf6aduvfck9ejtwspec9sljnf98","1u64"],
+    );
+  
+    alert(JSON.stringify(result));
+    //alert("Success!")
+    
+    console.log("publically transfered")
+    }
 
   return (
     <>
@@ -41,23 +41,21 @@ function App() {
         <h1 className="fw-bold display-1">cleanse.</h1>
         <h6 className="fw-light mb-5"> regain privacy on Aleo by transferring complete balance to fresh address</h6>
         <div className="card">
-          <form>
-            <div className="mb-3">
-              <label className="form-label">From:</label>
-              <input type="text" className="form-control" id="fromAddressInput"></input>
-              <div id="fromAddressText" className="form-text mb-5">Enter public account address containing balance.</div>
-            </div>
-            <div className="mb-3">
-              <label className="form-label">To:</label>
-              <input type="text" className="form-control" id="toAddressInput"></input>
-              <div id="toAddressText" className="form-text mb-5">Enter fresh public account address.</div>
-            </div>
-          </form>
-          <p>
-            <button className="btn btn-success" onClick={privatelyTransfer}>
-              Transfer
-            </button>
-          </p>
+          <div className="form-text">Retreive existing account to cleanse.</div>
+          <button className="btn btn-success my-3" onClick={connectAccount}>
+            Connect
+          </button>
+          <input type="text" className="form-control" id="connectedAccountOutput" disabled></input>
+          <hr className="hr my-4" />
+          <div className="form-text">Create fresh account to send funds.</div>
+          <button className="btn btn-secondary my-3" onClick={generateAccount}>
+            Generate
+          </button>
+          <input type="text" className="form-control" id="generatedAccountOutput" disabled></input>
+          <hr className="hr my-4" />
+          <button className="btn btn-danger mb-3" onClick={publicTransfer}>
+            Transfer
+          </button>
         </div>
       </div>
     </>
