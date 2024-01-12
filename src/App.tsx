@@ -8,7 +8,7 @@ const aleoWorker = AleoWorker();
 function App() {
 
   async function connectAccount() {
-    console.log("connected")
+    console.log("connected account")
   }
 
   async function generateAccount(){
