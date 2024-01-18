@@ -1,6 +1,6 @@
 
 import "./App.css";
-import cleanse_v1 from "../cleanse_v1/build/main.aleo?raw";
+import cleanse_v2 from "../cleanse_v2/build/main.aleo?raw";
 import { AleoWorker } from "./workers/AleoWorker";
 import { Account } from '@aleohq/sdk';
 
@@ -24,7 +24,7 @@ function App() {
   async function publicTransfer() {
 
     const result = await aleoWorker.localProgramExecution(
-      cleanse_v1,
+      cleanse_v2,
       "transfer_public",
       ["aleo1lm4cderp47hgxd7p4erfgngw7zw47cswf6aduvfck9ejtwspec9sljnf98","1u64"],
     );

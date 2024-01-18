@@ -1,4 +1,4 @@
-# cleanse_v1.aleo
+# cleanse_v2.aleo
 
 ## Build Guide
 

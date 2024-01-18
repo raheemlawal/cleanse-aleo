@@ -1,4 +1,4 @@
-// The program input for cleanse_v1/src/main.leo
+// The program input for cleanse_v2/src/main.leo
 [transfer_public]
 receiver: address = aleo1g99fqd0627le8zfpx3und55xg538yue6g0rstkx963vh9rjax5pskxxuaa;
 amount: u64 = 1u64;

@@ -1,17 +1,34 @@
-// The 'cleanse_v1' program.
+// The 'cleanse_v2' program.
 
-program cleanse_v1.aleo {
+program cleanse_v2.aleo {
     
     mapping account: address => u64;
 
-    /*
+    
     record token {
         // The token owner.
         owner: address,
         // The token amount.
         amount: u64,
     }
-    */
+    
+    /* Mint */
+
+    // The function `mint_public` issues the specified token amount for the token receiver publicly on the network.
+    transition mint_public(public receiver: address, public amount: u64) {
+        // Mint the tokens publicly by invoking the computation on-chain.
+        return then finalize(receiver, amount);
+    }
+
+    finalize mint_public(public receiver: address, public amount: u64) {
+        // Increments `account[receiver]` by `amount`.
+        // If `account[receiver]` does not exist, it will be created.
+        // If `account[receiver] + amount` overflows, `mint_public` is reverted.
+        let current_amount: u64 = Mapping::get_or_use(account, receiver, 0u64);
+        Mapping::set(account, receiver, current_amount + amount);
+    }
+
+    /* Transfer Public */
 
     transition transfer_public(public receiver: address, public amount: u64) {
         // Transfer the tokens publicly, by invoking the computation on-chain.
